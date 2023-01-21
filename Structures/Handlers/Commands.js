@@ -1,4 +1,4 @@
-const { Perms } = require("../Structures/Validation/Permissions");
+const { Perms } = require("../Validation/Permissions");
 const { Client } = require("discord.js")
 const ms = require("ms")
 

@@ -14,14 +14,14 @@ const client = new Client({
     rest: { timeout: ms("1m") }
 })
 
-client.events = new Collection()
+client.color = "Blue"
 client.commands = new Collection()
 
-const Handlers = ["Events", "Commands"]
+const Handlers = ["Events", "Commands", "Errors"]
 
 Handlers.forEach(handler => {
 
-    require(`../Handlers/${handler}`)(client, PG, Ascii)
+    require(`./Handlers/${handler}`)(client, PG, Ascii)
 
 })
 

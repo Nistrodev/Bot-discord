@@ -1,5 +1,7 @@
 const { Client } = require("discord.js")
 const ms = require("ms")
+const mongoose = require("mongoose");
+const mongodbURL = process.env.MONGODBURL
 
 module.exports = {
     name: "ready",
@@ -23,5 +25,18 @@ module.exports = {
             })
 
         }, ms("5s"))
+
+        if (!mongodbURL) return
+
+        mongoose.connect(mongodbURL, {
+
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+
+        }).then(() => {
+
+            console.log("Connected to Database !")
+
+        }).catch(err => console.log(err))
     }
 }
