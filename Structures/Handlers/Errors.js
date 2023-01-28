@@ -9,8 +9,8 @@ module.exports = async (client) => {
     const Embed = new EmbedBuilder()
         .setColor(client.color)
         .setTimestamp()
-        .setFooter({ text: "Anti-crash by Nistro" })
-        .setTitle("⚠️ | Error Encountered")
+        .setFooter({ text: "Anti-crash par Nistro" })
+        .setTitle("⚠️ | Erreur rencontrée")
 
     process.on("unhandledRejection", (reason, p) => {
 

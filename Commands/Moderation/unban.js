@@ -4,14 +4,14 @@ const ms = require("ms");
 
 module.exports = {
     name: "unban",
-    description: "Unbans a member from the server",
+    description: "Sélectionnez l'utilisateur à débannir du serveur",
     UserPerms: ["BanMembers"],
     BotPerms: ["BanMembers"],
     category: "Moderation",
     options: [
         {
             name: "user-id",
-            description: "Provide the user id",
+            description: "Entrez l'ID de l'utilisateur",
             type: 3,
             required: true
         }
@@ -28,10 +28,10 @@ module.exports = {
         const { options, user, guild } = interaction
 
         const id = options.getString("user-id")
-        if (isNaN(id)) return EditReply(interaction, "❌", `Please provide a valid ID in numbers !`)
+        if (isNaN(id)) return EditReply(interaction, "❌", `Veuillez fournir un ID valide en chiffres !`)
 
         const bannedMembers = await guild.bans.fetch()
-        if (!bannedMembers.find(x => x.user.id === id)) return EditReply(interaction, "❌", "The user is not banned yet !")
+        if (!bannedMembers.find(x => x.user.id === id)) return EditReply(interaction, "❌", "L'utilisateur n'est pas banni !")
 
         const Embed = new EmbedBuilder()
             .setColor(client.color)
@@ -41,19 +41,19 @@ module.exports = {
             new ButtonBuilder()
                 .setStyle(ButtonStyle.Danger)
                 .setCustomId("unban-yes")
-                .setLabel("Yes"),
+                .setLabel("Oui"),
 
             new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId("unban-no")
-                .setLabel("No")
+                .setLabel("Non")
 
         )
 
         const Page = await interaction.editReply({
 
             embeds: [
-                Embed.setDescription(`**⚠️ | Do you really want to unban this member ?**`)
+                Embed.setDescription(`**⚠️ | Voulez-vous vraiment débannir ce membre ?**`)
             ],
             components: [row]
 
@@ -76,7 +76,7 @@ module.exports = {
 
                     interaction.editReply({
                         embeds: [
-                            Embed.setDescription(`✅ | User is now unbanned`)
+                            Embed.setDescription(`✅ | L'utilisateur est maintenant débanni`)
                         ],
                         components: []
                     })
@@ -88,7 +88,7 @@ module.exports = {
 
                     interaction.editReply({
                         embeds: [
-                            Embed.setDescription(`✅ | Unban request cancelled`)
+                            Embed.setDescription(`✅ | La demande de débannissement a été annulée`)
                         ],
                         components: []
                     })
@@ -106,7 +106,7 @@ module.exports = {
 
             interaction.editReply({
                 embeds: [
-                    Embed.setDescription(`❌ | You didn't provide a valid response in time !`)
+                    Embed.setDescription(`❌ | Temps écoulé, aucune réponse valide fournie.`)
                 ],
                 components: []
             })

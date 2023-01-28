@@ -4,20 +4,20 @@ const ms = require("ms");
 
 module.exports = {
     name: "kick",
-    description: "Kicks a member from the server",
+    description: "Expulse un membre du serveur",
     UserPerms: ["KickMembers"],
     BotPerms: ["KickMembers"],
     category: "Moderation",
     options: [
         {
             name: "user",
-            description: "Select the user",
+            description: "Sélectionnez l'utilisateur",
             type: 6,
             required: true
         },
         {
             name: "reason",
-            description: "Provide a reason",
+            description: "Fournissez une raison",
             type: 3,
             required: false
         }
@@ -34,12 +34,12 @@ module.exports = {
         const { options, user, guild } = interaction
 
         const member = options.getMember("user")
-        const reason = options.getString("reason") || "no reason provided"
+        const reason = options.getString("reason") || "Aucune raison fournie"
 
-        if (member.id === user.id) return EditReply(interaction, "❌", `You can't kick yourself !`)
-        if (guild.ownerId === member.id) return EditReply(interaction, "❌", `You can't kick the server owner !`)
-        if (guild.members.me.roles.highest.position <= member.roles.highest.position) return EditReply(interaction, "❌", `You can't kick a member of your same level or higher !`)
-        if (interaction.member.roles.highest.position <= member.roles.highest.position) return EditReply(interaction, "❌", `I can't kick a member of my same level or higher !`)
+        if (member.id === user.id) return EditReply(interaction, "❌", `Vous ne pouvez pas vous expulser !`)
+        if (guild.ownerId === member.id) return EditReply(interaction, "❌", `Vous ne pouvez pas expulser le propriétaire du serveur !`)
+        if (guild.members.me.roles.highest.position <= member.roles.highest.position) return EditReply(interaction, "❌", `Vous ne pouvez pas expulser un membre de votre même niveau ou supérieur !`)
+        if (interaction.member.roles.highest.position <= member.roles.highest.position) return EditReply(interaction, "❌", `Je ne peux pas expulser un membre de mon même niveau ou supérieur !`)
 
         const Embed = new EmbedBuilder()
             .setColor(client.color)
@@ -49,19 +49,19 @@ module.exports = {
             new ButtonBuilder()
                 .setStyle(ButtonStyle.Danger)
                 .setCustomId("kick-yes")
-                .setLabel("Yes"),
+                .setLabel("Oui"),
 
             new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId("kick-no")
-                .setLabel("No")
+                .setLabel("Non")
 
         )
 
         const Page = await interaction.editReply({
 
             embeds: [
-                Embed.setDescription(`**⚠️ | Do you really want to kick this member ?**`)
+                Embed.setDescription(`**⚠️ | Voulez-vous vraiment expulser ce membre ?**`)
             ],
             components: [row]
 
@@ -84,7 +84,7 @@ module.exports = {
 
                     interaction.editReply({
                         embeds: [
-                            Embed.setDescription(`✅ | ${member} has been kicked for : **${reason}**`)
+                            Embed.setDescription(`✅ | ${member} a été expulsé pour : **${reason}**`)
                         ],
                         components: []
                     })
@@ -93,7 +93,7 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(client.color)
-                                .setDescription(`You've been kicked from ** ${guild.name}**`)
+                                .setDescription(`Vous avez été expulsé de ** ${guild.name}**`)
                         ]
                     }).catch(err => {
 
@@ -108,7 +108,7 @@ module.exports = {
 
                     interaction.editReply({
                         embeds: [
-                            Embed.setDescription(`✅ | Kick request cancelled`)
+                            Embed.setDescription(`✅ | La demande d'expulsion a été annulée.`)
                         ],
                         components: []
                     })
@@ -126,7 +126,7 @@ module.exports = {
 
             interaction.editReply({
                 embeds: [
-                    Embed.setDescription(`❌ | You didn't provide a valid response in time !`)
+                    Embed.setDescription(`❌ | Temps écoulé, aucune réponse valide fournie.`)
                 ],
                 components: []
             })

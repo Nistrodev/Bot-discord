@@ -2,7 +2,7 @@ const { Events } = require("../Validation/EventNames")
 
 module.exports = async (client, PG, Ascii) => {
 
-    const Table = new Ascii("Events Loaded")
+    const Table = new Ascii("Evénements chargés")
 
     const EventFiles = await PG(`${process.cwd()}/Events/*/*.js`)
 
@@ -14,7 +14,7 @@ module.exports = async (client, PG, Ascii) => {
 
             const L = file.split("/")
 
-            await Table.addRow(`${event.name || "MISSING"}`, `Event Name is either invalid or missing: ${L[6] + `/` + L[7]}`)
+            await Table.addRow(`${event.name || "MANQUANT" }`, `Le nom de l'événement est soit invalide soit manquant: ${L[6] + `/` + L[7]}`)
             return
 
         }
@@ -22,7 +22,7 @@ module.exports = async (client, PG, Ascii) => {
         if (event.once) client.once(event.name, (...args) => event.execute(...args, client))
         else client.on(event.name, (...args) => event.execute(...args, client))
 
-        await Table.addRow(event.name, "SUCCESSFUL")
+        await Table.addRow(event.name, "SUCCÉS")
 
     })
 

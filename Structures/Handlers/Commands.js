@@ -7,7 +7,7 @@ const ms = require("ms")
  */
 module.exports = async (client, PG, Ascii) => {
 
-    const Table = new Ascii("Commands Loaded")
+    const Table = new Ascii("Commandes chargées")
 
     let CommandsArray = []
 
@@ -17,16 +17,16 @@ module.exports = async (client, PG, Ascii) => {
 
         const command = require(file)
 
-        if (!command.name) return Table.addRow(file.split("/")[7], "FAILED", "Missing a Name")
-        if (!command.context && !command.description) return Table.addRow(command.name, "FAILED", "Missing a Description")
+        if (!command.name) return Table.addRow(file.split("/")[7], "ÉCHOUÉ", "Nom manquant")
+        if (!command.context && !command.description) return Table.addRow(command.name, "ÉCHOUÉ", "Description manquante")
         if (command.UserPerms)
             if (command.UserPerms.every(perms => Perms.includes(perms))) command.default_member_permissions = false
-            else return Table.addRow(command.name, "FAILED", "User Permission is Invalid")
+            else return Table.addRow(command.name, "ÉCHOUÉ", "Permission invalide")
 
         client.commands.set(command.name, command)
         CommandsArray.push(command)
 
-        await Table.addRow(command.name, "SUCCESSFUL")
+        await Table.addRow(command.name, "SUCCÉS")
 
     })
 

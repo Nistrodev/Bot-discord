@@ -3,7 +3,7 @@ const Reply = require("../../Systems/Reply")
 
 module.exports = {
     name: "ping",
-    description: "Displays the latency",
+    description: "Affiche la latence",
     category: "Information",
 
     /**
@@ -12,6 +12,6 @@ module.exports = {
      */
     async execute(interaction, client) {
 
-        return Reply(interaction, "⌛", `The current Webscoket Latency is : \`${client.ws.ping} ms\``, false)
+        return Reply(interaction, "⌛", `La latence actuelle du Webscoket est : \`${client.ws.ping} ms\``, false)
     }
 }

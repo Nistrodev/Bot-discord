@@ -18,10 +18,10 @@ module.exports = {
 
         const command = client.commands.get(commandName)
 
-        if (!command) return Reply(interaction, "❌", `An error occured while running the command`, true) && client.commands.delete(commandName)
+        if (!command) return Reply(interaction, "❌", `Une erreur est survenue lors de l'exécution de la commande`, true) && client.commands.delete(commandName)
 
-        if (command.UserPerms && command.UserPerms.length !== 0) if (!member.permissions.has(command.UserPerms)) return Reply(interaction, "❌", `You need \`${command.UserPerms.join(", ")}\` permission(s) to execute this command !`, true)
-        if (command.BotPerms && command.BotPerms.length !== 0) if (!guild.members.me.permissions.has(command.BotPerms)) return Reply(interaction, "❌", `I need \`${command.UserPerms.join(", ")}\` permission(s) to execute this command !`, true)
+        if (command.UserPerms && command.UserPerms.length !== 0) if (!member.permissions.has(command.UserPerms)) return Reply(interaction, "❌", `Vous avez besoin de la/des permission(s) \`${command.UserPerms.join(", ")}\` pour exécuter cette commande !`, true)
+        if (command.BotPerms && command.BotPerms.length !== 0) if (!guild.members.me.permissions.has(command.BotPerms)) return Reply(interaction, "❌", `J'ai besoin de la/des permission(s) \`${command.UserPerms.join(", ")}\` pour exécuter cette commande !`, true)
 
         command.execute(interaction, client)
 

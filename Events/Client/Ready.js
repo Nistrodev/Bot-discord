@@ -13,7 +13,7 @@ module.exports = {
 
         const { user, ws } = client
 
-        console.log(`${user.tag} is now online !`)
+        console.log(`${user.tag} est maintenant en ligne !`)
 
         setInterval(() => {
 
@@ -35,7 +35,7 @@ module.exports = {
 
         }).then(() => {
 
-            console.log("Connected to Database !")
+            console.log("Connecté à la base de donnée !")
 
         }).catch(err => console.log(err))
     }
