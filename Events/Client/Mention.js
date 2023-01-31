@@ -23,9 +23,9 @@ module.exports = {
                 new EmbedBuilder()
                     .setColor(client.color)
                     .setAuthor({ name: user.username, iconURL: user.displayAvatarURL() })
-                    .setDescription(`Salut, tu m'as appelé ? Enchanté de te rencontrer. Tape `/` & clique sur mon logo pour voir toutes mes commandes!\n\n*Ce message sera supprimé dans \`10 secondes\`!*`)
+                    .setDescription(`Salut, tu m'as appelé ? Enchanté de te rencontrer. Tape \`/\` & clique sur mon logo pour voir toutes mes commandes!\n\n*Ce message sera supprimé dans \`10 secondes\`!*`)
                     .setThumbnail(user.displayAvatarURL())
-                    .setFooter({ text: "Introduction to Drago" })
+                    .setFooter({ text: "Développé par Nistro#2305" })
                     .setTimestamp()
             ],
 
